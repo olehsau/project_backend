@@ -11,6 +11,20 @@
 </head>
 <body>
     <div className='container'>
+        <h2>register</h2>
+        <h4>Name</h4>
+        <input type="text" id="regname" name="regname"><br>
+        <h4>Password</h4>
+        <input type="text" id="regpwd" name="regpwd"><br>
+        <button id="register">Register</button><br><br>
+
+        <h2>login</h2>
+        <h4>Name</h4>
+        <input type="text" id="logname" name="logname"><br>
+        <h4>Password</h4>
+        <input type="text" id="logpwd" name="logpwd"><br>
+        <button id="login">login</button>
+
         <div className='jumbotron'>
             <h1 className='display-4'>Send message</h1>
             <input id='name' className='form-control' placeholder='name'></input>
@@ -26,6 +40,17 @@
     <script>
         getMessages();
         $(() => {
+            $("#register").click(()=>{
+                $.post('http://localhost:3005/register', {
+                  name: $("#regname").val(), 
+                  password:$("#regpwd").val()
+                })
+                $("#regname").val('');
+                $("#regpwd").val('');
+                })
+            })
+
+        $(() => {
             $("#send").click(()=>{
                sendMessage({
                   name: $("#name").val(), 
@@ -36,6 +61,17 @@
                 })
             })
             
+        $(() => {
+            $("#login").click(()=>{
+                $.post('http://localhost:3005/login', {
+                  name: $("#logname").val(), 
+                  password:$("#logpwd").val()
+                })
+                $("#logname").val('');
+                $("#logpwd").val('');
+                })
+            })
+
         function addMessages(message){
            $("#messages").prepend(`
               <h4> ${message.name} </h4>
