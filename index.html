@@ -48,6 +48,14 @@
         function sendMessage(message){
            $.post('http://localhost:3005/messages', message)
          }
+        
     </script>
+
+    <script src="http://localhost:3005/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        socket.on('message', getMessages)
+    </script>
+
 </body>
 </html>
