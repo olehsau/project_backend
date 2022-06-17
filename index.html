@@ -24,17 +24,20 @@
         </div>
     </div>
     <script>
+        getMessages();
         $(() => {
             $("#send").click(()=>{
                sendMessage({
                   name: $("#name").val(), 
-                  message:$("#message").val()});
+                  message:$("#message").val()
+                });
+                $("#name").val('');
+                $("#message").val('');
                 })
-              getMessages()
             })
             
         function addMessages(message){
-           $("#messages").append(`
+           $("#messages").prepend(`
               <h4> ${message.name} </h4>
               <p>  ${message.message} </p>`)
            }

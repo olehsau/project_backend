@@ -6,7 +6,11 @@ app.use(express.static(__dirname));
 
 const http = require('http');
 
-var io = require('socket.io')(http);
+const server = http.createServer(app);
+
+const { Server } = require("socket.io");
+
+const io = new Server(server);
 
 var mongoose = require('mongoose');
 
@@ -42,11 +46,11 @@ app.post('/messages', (req, res) => {
   })
 
 
-  io.on('connection', () =>{
-    console.log('a user is connected')
-  })
-  
+  io.on('connection', (socket) => {
+    console.log('a user connected');
+  });
 
-var server = app.listen(3005, () => {
-    console.log('server is running on port', server.address().port);
-});
+
+  server.listen(3005, () => {
+    console.log('listening on *:3005');
+  });
